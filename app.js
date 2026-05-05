@@ -8,12 +8,14 @@ const toleranceSlider = document.getElementById('tolerance');
 const toleranceVal = document.getElementById('toleranceVal');
 const downloadBtn = document.getElementById('downloadBtn');
 const resetBtn = document.getElementById('resetBtn');
+const addMoreBtn = document.getElementById('addMoreBtn');
 const themeToggle = document.getElementById('themeToggle');
 
 const singlePreview = document.getElementById('singlePreview');
 const batchGrid = document.getElementById('batchGrid');
 const batchInfo = document.getElementById('batchInfo');
 const batchCount = document.getElementById('batchCount');
+const currentModeBadge = document.getElementById('currentModeBadge');
 
 let originalImage = null; // Used for single mode
 let batchImages = []; // Array of { name, img }
@@ -43,6 +45,7 @@ initTheme();
 // --- Event Listeners ---
 
 uploadArea.addEventListener('click', () => fileInput.click());
+addMoreBtn.addEventListener('click', () => fileInput.click());
 
 fileInput.addEventListener('change', (e) => {
     if (e.target.files.length) handleFiles(e.target.files);
@@ -104,31 +107,18 @@ async function handleFiles(files) {
 
     uploadArea.classList.add('hidden');
     editorView.classList.remove('hidden');
+    addMoreBtn.classList.remove('hidden');
 
-    if (imageFiles.length === 1) {
-        isBatch = false;
-        singlePreview.classList.remove('hidden');
-        batchGrid.classList.add('hidden');
-        batchInfo.classList.add('hidden');
-        downloadBtn.textContent = 'Download PNG';
-        
-        const file = imageFiles[0];
-        const img = await loadImage(file);
-        originalImage = img;
-        originalPreview.src = img.src;
-        resultCanvas.width = img.naturalWidth;
-        resultCanvas.height = img.naturalHeight;
-        processImage();
-    } else {
+    // If we already have images, we force batch mode
+    if (batchImages.length > 0 || imageFiles.length > 1) {
         isBatch = true;
         singlePreview.classList.add('hidden');
         batchGrid.classList.remove('hidden');
         batchInfo.classList.remove('hidden');
         downloadBtn.textContent = 'Download ZIP';
+        currentModeBadge.textContent = 'Batch Mode';
         
-        batchImages = [];
-        batchGrid.innerHTML = '';
-        batchCount.textContent = `Loading ${imageFiles.length} images...`;
+        batchCount.textContent = `Loading ${imageFiles.length} new images...`;
         
         for (const file of imageFiles) {
             const img = await loadImage(file);
@@ -136,6 +126,25 @@ async function handleFiles(files) {
         }
         
         renderBatch();
+    } else {
+        // Single file, and no previous images
+        isBatch = false;
+        singlePreview.classList.remove('hidden');
+        batchGrid.classList.add('hidden');
+        batchInfo.classList.add('hidden');
+        downloadBtn.textContent = 'Download PNG';
+        currentModeBadge.textContent = 'Single Mode';
+        
+        const file = imageFiles[0];
+        const img = await loadImage(file);
+        originalImage = img;
+        // Also add to batchImages in case user adds more later
+        batchImages = [{ name: file.name, img }];
+        
+        originalPreview.src = img.src;
+        resultCanvas.width = img.naturalWidth;
+        resultCanvas.height = img.naturalHeight;
+        processImage();
     }
 }
 
@@ -156,7 +165,6 @@ function processImage(imgSource = originalImage) {
 
     const tolerance = parseInt(toleranceSlider.value);
     
-    // Use an internal canvas for batch processing to avoid flickering
     const tempCanvas = document.createElement('canvas');
     tempCanvas.width = imgSource.naturalWidth;
     tempCanvas.height = imgSource.naturalHeight;
@@ -176,7 +184,6 @@ function processImage(imgSource = originalImage) {
 
     tempCtx.putImageData(imageData, 0, 0);
 
-    // If it's single mode, update the main canvas
     if (!isBatch) {
         resultCanvas.width = tempCanvas.width;
         resultCanvas.height = tempCanvas.height;
@@ -205,7 +212,7 @@ function renderBatch() {
         batchGrid.appendChild(itemEl);
     });
 
-    batchCount.textContent = `Ready! ${batchImages.length} images processed.`;
+    batchCount.textContent = `Ready! ${batchImages.length} images in batch.`;
 }
 
 function downloadResult() {
@@ -241,7 +248,9 @@ async function downloadZip() {
 function resetApp() {
     originalImage = null;
     batchImages = [];
+    isBatch = false;
     fileInput.value = '';
     uploadArea.classList.remove('hidden');
     editorView.classList.add('hidden');
+    addMoreBtn.classList.add('hidden');
 }
