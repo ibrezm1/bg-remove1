@@ -9,6 +9,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
 </head>
 <body>
     <div class="background-blobs">
@@ -39,7 +40,7 @@
 
         <section class="app-container" id="dropZone">
             <div class="upload-area" id="uploadArea">
-                <input type="file" id="fileInput" accept="image/*" hidden>
+                <input type="file" id="fileInput" accept="image/*" multiple hidden>
                 <div class="upload-content">
                     <div class="upload-icon">📸</div>
                     <h3>Drag & Drop your image</h3>
@@ -65,7 +66,11 @@
                     </div>
                 </div>
 
-                <div class="preview-container">
+                <div id="batchInfo" class="batch-info hidden">
+                    <span id="batchCount">Processing 0/0 images...</span>
+                </div>
+
+                <div class="preview-container" id="singlePreview">
                     <div class="preview-box">
                         <span class="badge">Original</span>
                         <div class="canvas-wrapper">
@@ -78,6 +83,10 @@
                             <canvas id="resultCanvas"></canvas>
                         </div>
                     </div>
+                </div>
+
+                <div id="batchGrid" class="batch-grid hidden">
+                    <!-- Batch items will be injected here -->
                 </div>
             </div>
         </section>
