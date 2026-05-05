@@ -2,7 +2,7 @@
 
 A premium, client-side web application to instantly remove white backgrounds from images and make them transparent.
 
-![Demo](https://via.placeholder.com/800x400/050505/ffffff?text=PureClear+Interface) <!-- Replace with actual screenshot if possible -->
+### 🌐 [Live Demo](https://ibrezm1.github.io/bg-remove1/)
 
 ## 🚀 How to use
 1. **Upload**: Drag and drop an image (JPG, PNG, WebP) with a white background.
