@@ -16,30 +16,16 @@ A premium, client-side web application to instantly remove white backgrounds fro
 
 ## 📦 How to Publish to GitHub Pages (github.io)
 
-This project is a static website, making it perfect for GitHub Pages.
+This project is already pushed to GitHub! To make it live:
 
-1. **Create a GitHub Repository**: 
-   - Go to [GitHub](https://github.com/new) and create a new repository (e.g., `web-bg-remover`).
-2. **Upload Files**:
-   - Push your files (`index.html`, `style.css`, `app.js`) to the repository.
-   ```bash
-   git init
-   git add .
-   git commit -m "Initial commit"
-   git branch -M main
-   git remote add origin https://github.com/YOUR_USERNAME/web-bg-remover.git
-   git push -u origin main
-   ```
-3. **Enable GitHub Pages**:
-   - Go to your repository **Settings** on GitHub.
-   - Click on **Pages** in the left sidebar.
-   - Under **Build and deployment**, set **Source** to "Deploy from a branch".
-   - Select the `main` branch and `/root` folder, then click **Save**.
-4. **Access your site**:
-   - Your site will be live at `https://YOUR_USERNAME.github.io/web-bg-remover/` in a few minutes!
+1. Go to your repository **Settings** at [github.com/ibrezm1/bg-remove1/settings](https://github.com/ibrezm1/bg-remove1/settings).
+2. Click on **Pages** in the left sidebar.
+3. Under **Build and deployment**, set **Source** to "Deploy from a branch".
+4. Select the `main` branch and `/ (root)` folder, then click **Save**.
+5. Your site will be live at: [https://ibrezm1.github.io/bg-remove1/](https://ibrezm1.github.io/bg-remove1/)
 
 ## 🔒 Privacy
 All processing happens locally in your browser. Your images are never uploaded to any server.
 
 ---
-Built by [Antigravity](https://google.com) for ibrezmm.
+Built by [Antigravity](https://google.com) for ibrezm1.
