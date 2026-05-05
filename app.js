@@ -8,9 +8,30 @@ const toleranceSlider = document.getElementById('tolerance');
 const toleranceVal = document.getElementById('toleranceVal');
 const downloadBtn = document.getElementById('downloadBtn');
 const resetBtn = document.getElementById('resetBtn');
+const themeToggle = document.getElementById('themeToggle');
 
 let originalImage = null;
 const ctx = resultCanvas.getContext('2d', { willReadFrequently: true });
+
+// --- Theme Management ---
+function initTheme() {
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'light') {
+        document.body.classList.add('light-mode');
+        themeToggle.textContent = '🌙';
+    } else {
+        themeToggle.textContent = '☀️';
+    }
+}
+
+themeToggle.addEventListener('click', () => {
+    document.body.classList.toggle('light-mode');
+    const isLight = document.body.classList.contains('light-mode');
+    localStorage.setItem('theme', isLight ? 'light' : 'dark');
+    themeToggle.textContent = isLight ? '🌙' : '☀️';
+});
+
+initTheme();
 
 // --- Event Listeners ---
 
