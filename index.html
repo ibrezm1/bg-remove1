@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PureClear | Remove White Backgrounds Instantly</title>
+    <meta name="description" content="A premium web tool to remove white backgrounds from images and make them transparent instantly.">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="background-blobs">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+    </div>
+
+    <header>
+        <nav>
+            <div class="logo">
+                <span class="logo-icon">✨</span>
+                <h1>PureClear</h1>
+            </div>
+            <div class="links">
+                <a href="https://github.com/ibrezmm" target="_blank">GitHub</a>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero">
+            <h2>Crystal Clear <span class="gradient-text">Transparency</span></h2>
+            <p>The simplest way to remove white backgrounds from your icons, logos, and photos.</p>
+        </section>
+
+        <section class="app-container" id="dropZone">
+            <div class="upload-area" id="uploadArea">
+                <input type="file" id="fileInput" accept="image/*" hidden>
+                <div class="upload-content">
+                    <div class="upload-icon">📸</div>
+                    <h3>Drag & Drop your image</h3>
+                    <p>or click to browse files</p>
+                    <span class="format-hint">Supports PNG, JPG, WebP</span>
+                </div>
+            </div>
+
+            <div class="editor-view hidden" id="editorView">
+                <div class="controls-panel">
+                    <div class="control-group">
+                        <label for="tolerance">White Tolerance</label>
+                        <div class="slider-wrapper">
+                            <input type="range" id="tolerance" min="0" max="255" value="30">
+                            <span id="toleranceVal">30</span>
+                        </div>
+                        <p class="control-hint">Adjust if the subject has light colors.</p>
+                    </div>
+                    
+                    <div class="actions">
+                        <button id="resetBtn" class="btn-secondary">New Image</button>
+                        <button id="downloadBtn" class="btn-primary">Download PNG</button>
+                    </div>
+                </div>
+
+                <div class="preview-container">
+                    <div class="preview-box">
+                        <span class="badge">Original</span>
+                        <div class="canvas-wrapper">
+                            <img id="originalPreview" alt="Original">
+                        </div>
+                    </div>
+                    <div class="preview-box">
+                        <span class="badge badge-result">Result</span>
+                        <div class="canvas-wrapper transparency-grid">
+                            <canvas id="resultCanvas"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="features">
+            <div class="feature-card">
+                <div class="f-icon">🔒</div>
+                <h4>Private & Local</h4>
+                <p>Images never leave your browser. All processing is done on your device.</p>
+            </div>
+            <div class="feature-card">
+                <div class="f-icon">⚡</div>
+                <h4>Instant Results</h4>
+                <p>Real-time processing with adjustable tolerance for the perfect cut.</p>
+            </div>
+            <div class="feature-card">
+                <div class="f-icon">🎨</div>
+                <h4>HD Quality</h4>
+                <p>Preserves original resolution and exports in high-quality PNG.</p>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 PureClear. Built with ✨ by Antigravity.</p>
+    </footer>
+
+    <script src="app.js"></script>
+</body>
+</html>
